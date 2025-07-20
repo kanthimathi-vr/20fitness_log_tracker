@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="log-detail">
+  <img src="{{ url_for('static', filename='icons/' + log.type + '.svg') }}" class="icon-large" alt="{{ log.type }}">
+  <h2>{{ log.type.title() }}</h2>
+  <p><strong>Date:</strong> {{ log.date }}</p>
+  <p><strong>Duration:</strong> {{ log.duration }} minutes</p>
+  {% if log.notes %}
+  <p><strong>Notes:</strong> {{ log.notes }}</p>
+  {% endif %}
+  <a href="{{ url_for('home', date=log.date) }}" class="back-link">← Back to Logs</a>
+</div>
+{% endblock %}

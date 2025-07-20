@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fitness Log Tracker</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+  <a href="{{ url_for('home') }}" class="nav-logo">FitTrack</a>
+  <a href="{{ url_for('home') }}" class="nav-link">Log Workout</a>
+</nav>
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+<footer class="footer">
+  &copy; 2025 FitTrack App
+</footer>
+</body>
+</html>
