@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Fitness Log</h1>
+
+<form class="form" method="POST" action="{{ url_for('add_log') }}">
+  <input type="date" name="date" required>
+  <select name="type" required>
+    <option value="cardio">Cardio</option>
+    <option value="strength">Strength</option>
+    <option value="yoga">Yoga</option>
+  </select>
+  <input type="number" name="duration" placeholder="Minutes" required>
+  <input type="text" name="notes" placeholder="Notes (optional)">
+  <button type="submit">Add Workout</button>
+</form>
+
+<div class="filter-bar">
+  <span>Filter by date:</span>
+  <a href="{{ url_for('home') }}" class="filter-btn {% if not selected_date %}active{% endif %}">All</a>
+  {% for d in dates %}
+    <a href="{{ url_for('home') }}?date={{ d }}" class="filter-btn {% if selected_date == d %}active{% endif %}">{{ d }}</a>
+  {% endfor %}
+</div>
+
+<ul class="log-list">
+  {% for log in logs %}
+    <li class="log-item">
+      <a href="{{ url_for('log_detail', log_id=log.id) }}">
+        <img src="{{ url_for('static', filename='icons/' + log.type + '.svg') }}" class="icon" alt="{{ log.type }}">
+        <div class="info">
+          <strong>{{ log.type.title() }}</strong> — {{ log.duration }} min
+          <div><small>{{ log.date }}</small></div>
+        </div>
+      </a>
+    </li>
+  {% else %}
+    <p>No logs found.</p>
+  {% endfor %}
+</ul>
+{% endblock %}
